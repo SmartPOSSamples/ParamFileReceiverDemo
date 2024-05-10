@@ -34,6 +34,4 @@ public class TextViewUtil {
     public static void infoMAGENTATextView(TextView log_text, String msg) {
         infoColorfulTextView(log_text, msg, Color.MAGENTA);
     }
-
-
 }

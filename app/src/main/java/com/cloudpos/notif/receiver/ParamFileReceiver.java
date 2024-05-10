@@ -15,7 +15,6 @@ public class ParamFileReceiver extends BroadcastReceiver {
         String notification = intent.getStringExtra("notification");
         if (notification != null && MSG_TYPE_PARAM.equals(notification.subSequence(0, MSG_TYPE_PARAM.length()))) {
             String fileName = notification.substring(MSG_TYPE_PARAM.length());
-            ; //除去多余的字符：以TYPE长度截取参数
             sendMsgToActivity(context, fileName);
         }
     }

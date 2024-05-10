@@ -30,8 +30,6 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends ConstantActivity {
     public static final String URI_PARAM_FILE = "content://com.wizarpos.wizarviewagent.paramfilesprovider/file/";
-    public static final String KEY_READED = "readed";
-    public static final String KEY_ERRLOG = "errlog";
     private static final String TAG = "MainActivity";
     private static String mFileName = null;
     private Context mContext;
@@ -146,21 +144,17 @@ public class MainActivity extends ConstantActivity {
         Uri uri = Uri.parse(URI_PARAM_FILE + fileName);
         ContentResolver resolver = context.getContentResolver();
         ContentValues vaules = new ContentValues();
-        // 代表参数信息是已经已经应用成功。
 
         if (isSuccess) {
-            vaules.put("readed", true);
+            vaules.put("read", true);
         } else {
-            // 代表参数信息是无法应用。
-            vaules.put("readed", false);
-            vaules.put("errlog", getString(R.string.apply_fail));//提示服务器运营人员问题出在哪里。
+            vaules.put("read", false);
+            vaules.put("log", getString(R.string.apply_fail));//提示服务器运营人员问题出在哪里。
         }
 
-        // 将参数适配的结果通知给服务
         Uri resultUri = resolver.insert(uri, vaules);
 
         writerInFailedLog(resultUri.toString());
-//		 }
     }
 
     /**
