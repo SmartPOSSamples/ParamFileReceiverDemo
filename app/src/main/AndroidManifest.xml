@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wizarpos.notif.activity"
+    package="com.cloudpos.notif.activity"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -29,7 +29,7 @@
         <receiver
             android:name="com.cloudpos.notif.receiver.ParamFileReceiver">
             <intent-filter>
-                <action android:name="com.wizarpos.notif.activity" />
+                <action android:name="com.cloudpos.notif.activity" />
             </intent-filter>
         </receiver>
     </application>

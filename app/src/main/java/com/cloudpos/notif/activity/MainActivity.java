@@ -20,7 +20,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.cloudpos.util.TextViewUtil;
-import com.wizarpos.notif.activity.R;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
