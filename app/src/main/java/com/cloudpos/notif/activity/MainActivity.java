@@ -143,17 +143,29 @@ public class MainActivity extends ConstantActivity {
         Uri uri = Uri.parse(URI_PARAM_FILE + fileName);
         ContentResolver resolver = context.getContentResolver();
         ContentValues vaules = new ContentValues();
-
-        if (isSuccess) {
-            vaules.put("read", true);
-        } else {
-            vaules.put("read", false);
-            vaules.put("log", getString(R.string.apply_fail));//提示服务器运营人员问题出在哪里。
+        vaules.put("readed", isSuccess);  // 很多Provider用整数表示boolean
+        if (!isSuccess) {
+            vaules.put("errlog", getString(R.string.apply_fail));//提示服务器运营人员问题出在哪里。
         }
 
-        Uri resultUri = resolver.insert(uri, vaules);
+        try {
+            Log.d("Debug", uri.toString());
+            Uri resultUri = resolver.insert(uri, vaules);
 
-        writerInFailedLog(resultUri.toString());
+            if (resultUri == null) {
+                Log.e("Debug", "Insert returned null");
+                // 检查是否有权限读取该Provider
+                Log.d("Debug", "Provider exists: " + (resolver.getType(uri) != null));
+            } else {
+                Log.d("Debug", "Insert success: " + resultUri.toString());
+            }
+
+            writerInFailedLog(resultUri != null ? resultUri.toString() : "null");
+
+        } catch (Exception e) {
+            Log.e("Debug", "Insert failed with exception", e);
+            writerInFailedLog("Exception: " + e.getMessage());
+        }
     }
 
     /**
